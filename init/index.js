@@ -1,14 +1,22 @@
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
+const path = require("path");
 
-// Use ATLASDB_URL if available in .env, otherwise fallback to local DB
-require("dotenv").config({ path: "../.env" });
-const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderlust";
+// Load .env from root folder
+require("dotenv").config({ path: path.join(__dirname, "../.env") });
+
+// Use process.env.ATLASDB_URL or fallback if defined
+const dbUrl = process.env.ATLASDB_URL;
+
+if (!dbUrl) {
+    console.error("ERROR: ATLASDB_URL is not defined in your .env file!");
+    process.exit(1);
+}
 
 main()
     .then(() => {
-        console.log("Connected to MongoDB");
+        console.log("Connected to MongoDB Atlas!");
         initDB();
     })
     .catch((err) => {
@@ -23,16 +31,13 @@ const initDB = async () => {
     try {
         await Listing.deleteMany({});
 
-        // Paste your copied MongoDB User _id here
-        const defaultOwnerId = "6a9d8988e8fa7ae3ebcbb402";
-
-        const updatedData = initData.data.map((obj) => ({
+        initData.data = initData.data.map((obj) => ({
             ...obj,
-            owner: defaultOwnerId,
+            owner: "6a9d8988e8fa7ae3ebcbb402",
         }));
 
-        await Listing.insertMany(updatedData);
-        console.log("Data was initialized successfully with world listings!");
+        await Listing.insertMany(initData.data);
+        console.log("MongoDB Atlas database was initialized successfully!");
     } catch (err) {
         console.log("Seeding error:", err);
     } finally {
