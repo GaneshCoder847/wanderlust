@@ -5,15 +5,14 @@ body {
     min-height: 100vh;
 }
 
-.container{
+.container {
     flex: 1;
 }
 
-
-/* Navbar */
-.navber {
-    height: 5rem;
+/* Navbar Base & Mobile */
+.navbar {
     background-color: white;
+    padding: 0.5rem 1rem;
 }
 
 .fa-compass {
@@ -25,8 +24,31 @@ body {
     color: #222222 !important;
 }
 
+.search-btn {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0.4rem 1.2rem;
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background-color: #fe424d;
+    color: #fff;
+}
+
+.search-btn i {
+    display: inline;
+    margin-right: 0.4rem;
+}
+
+.search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem;
+}
+
 /* Footer */
-.f-info-links a{
+.f-info-links a {
     text-decoration: none;
     color: #222222;
 }
@@ -44,37 +66,36 @@ body {
     justify-content: center;
 }
 
-
 .f-info-socials i {
     font-size: 1.2rem;
-    margin-right: 1rem;
+    margin: 0 0.5rem;
 }
 
 .f-info {
     text-align: center;
-    height: 8rem;
+    padding: 1.5rem 1rem;
     background-color: #ebebeb;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: space-evenly;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 /* Cards */
 .listing-card {
     border: none !important;
     margin-bottom: 2rem;
-
 }
 
-.card-img-top{
+.card-img-top {
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
 }
 
 .card-body {
-    padding: 0 !important;
+    padding: 0.5rem 0 0 0 !important;
 }
 
 .card-text p {
@@ -83,6 +104,7 @@ body {
 
 .listing-link {
     text-decoration: none;
+    color: inherit;
 }
 
 /* Card Effect */
@@ -95,38 +117,81 @@ body {
     background-color: white;
 }
 
-
-/* New page */
-.add-btn {
+/* New / Edit page buttons */
+.add-btn, .edit-btn {
     background-color: #fe424d !important;
     border: none !important;
 }
 
-/* Edit page */
-.edit-btn{
-  background-color: #fe424d !important;
-  border: none !important;
-}
-
 /* Show page */
-.show-img{
-    height: 30vh;
+.show-img {
+    height: 40vh;
+    border-radius: 1rem;
+    object-fit: cover;
+    width: 100%;
 }
 
-.btns{
+.btns {
     display: flex;
+    gap: 1rem;
 }
 
-.show-card{
+.show-card {
     padding-left: 0;
     padding-right: 0;
 }
-
-
 
 /* Map */
 #map {
     height: 400px;
     width: 100%;
     border-radius: 10px;
+}
+
+/* =================================================== */
+/* MEDIA QUERIES FOR MOBILE RESPONSIVENESS            */
+/* =================================================== */
+
+@media (max-width: 768px) {
+    /* Navbar stack alignment on small screens */
+    .navbar-collapse {
+        margin-top: 0.75rem;
+    }
+
+    .navbar-nav {
+        gap: 0.5rem;
+    }
+
+    .navbar-nav form {
+        margin: 0.5rem 0;
+        width: 100%;
+    }
+
+    .search-inp {
+        width: 100%;
+    }
+
+    /* Cards image height adjustment */
+    .card-img-top {
+        height: 16rem !important;
+    }
+
+    .show-img {
+        height: 25vh;
+    }
+
+    #map {
+        height: 280px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .card-img-top {
+        height: 14rem !important;
+    }
 }

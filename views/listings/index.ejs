@@ -1,97 +1,131 @@
 <% layout("/layouts/boilerplate") %>
 
     <style>
+        /* Filter Bar Container - Horizontal scroll on mobile */
         #filters {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+        }
+
+        #filters::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        .filter-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-shrink: 0;
         }
 
         .filter {
             text-align: center;
-            margin-right: 2rem;
-            margin-top: 1rem;
             opacity: 0.7;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: opacity 0.2s ease-in-out;
         }
 
         .filter:hover {
             opacity: 1;
-            cursor: pointer;
         }
 
         .filter p {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            margin-bottom: 0;
+            margin-top: 0.25rem;
+        }
+
+        .filter div i {
+            font-size: 1.2rem;
         }
 
         .tax-toggle {
             border: 1px solid #ccc;
             border-radius: 1rem;
             height: 3.25rem;
-            padding: 1rem;
-            margin-top: 0.5rem;
+            padding: 0.75rem 1rem;
             display: flex;
             align-items: center;
+            white-space: nowrap;
             margin-left: auto;
+            flex-shrink: 0;
         }
 
-        /* Hide extra filters on smaller screens to keep layout responsive */
-        @media (max-width: 1200px) {
+        @media (max-width: 992px) {
+            .tax-toggle {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: 100%;
+                justify-content: center;
+            }
+
             .filter-extra {
-                display: none;
+                display: flex;
             }
         }
     </style>
 
-    <div id="filters">
-        <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic Cities</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-cow"></i></div>
-            <p>Farms</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-regular fa-snowflake"></i></div>
-            <p>Arctic</p>
-        </div>
-
-        <!-- Added 3 New Filters -->
-        <div class="filter filter-extra">
-            <div><i class="fa-solid fa-igloo"></i></div>
-            <p>Domes</p>
-        </div>
-        <div class="filter filter-extra">
-            <div><i class="fa-solid fa-ship"></i></div>
-            <p>Boats</p>
-        </div>
-        <div class="filter filter-extra">
-            <div><i class="fa-solid fa-person-skiing"></i></div>
-            <p>Skiing</p>
+    <div class="d-flex flex-column flex-lg-row align-items-lg-center my-2 gap-2">
+        <div id="filters">
+            <div class="filter-container">
+                <div class="filter">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p>Trending</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-bed"></i></div>
+                    <p>Rooms</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain-city"></i></div>
+                    <p>Iconic Cities</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain"></i></div>
+                    <p>Mountains</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-brands fa-fort-awesome"></i></div>
+                    <p>Castles</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-person-swimming"></i></div>
+                    <p>Amazing Pools</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-campground"></i></div>
+                    <p>Camping</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-cow"></i></div>
+                    <p>Farms</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-regular fa-snowflake"></i></div>
+                    <p>Arctic</p>
+                </div>
+                <div class="filter filter-extra">
+                    <div><i class="fa-solid fa-igloo"></i></div>
+                    <p>Domes</p>
+                </div>
+                <div class="filter filter-extra">
+                    <div><i class="fa-solid fa-ship"></i></div>
+                    <p>Boats</p>
+                </div>
+                <div class="filter filter-extra">
+                    <div><i class="fa-solid fa-person-skiing"></i></div>
+                    <p>Skiing</p>
+                </div>
+            </div>
         </div>
 
         <div class="tax-toggle">
@@ -102,7 +136,7 @@
         </div>
     </div>
 
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 mt-3">
         <% for(let listing of allListings) { %>
             <a href="/listings/<%= listing._id %>" class="listing-link">
                 <div class="card col listing-card">
@@ -114,7 +148,7 @@
                                 <%= listing.title %>
                             </b> <br>
                             &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
-                                <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+                                <i class="tax-info" style="display: none;"> &nbsp; &nbsp;+18% GST</i>
                         </p>
                     </div>
                 </div>
@@ -132,7 +166,6 @@
                 } else {
                     info.style.display = "none";
                 }
-
             }
         });
     </script>
